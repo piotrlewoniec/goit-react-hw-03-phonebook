@@ -53,6 +53,14 @@ export class App extends Component {
       Notiflix.Notify.warning('Please input missing data');
       return;
     }
+    const regexName = new RegExp("^[a-zA-Za]+(([' -][a-zA-Za])?[a-zA-Za]*)*$");
+    const regexNumberPattern =
+      /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    const regexNumber = new RegExp(regexNumberPattern);
+    if (!regexName.test(name) || !regexNumber.test(number)) {
+      Notiflix.Notify.failure('Correct inputed data');
+      return;
+    }
     Notiflix.Notify.success('Adding new contact');
     const element = localStorageGetStatus(
       this.localStorageLibraryName,
